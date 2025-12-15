@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "S3 Bucket for ML Project - Lab 1"
+
+Resources:
+  MLProjectBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "ml-project-${AWS::AccountId}-${AWS::Region}"
+      Tags:
+        - Key: Project
+          Value: MLProject
+        - Key: Environment
+          Value: Development
+
+Outputs:
+  BucketName:
+    Description: Name of the S3 bucket
+    Value: !Ref MLProjectBucket
+    Export:
+      Name: MLProjectBucketName
+
+  BucketArn:
+    Description: ARN of the S3 bucket
+    Value: !GetAtt MLProjectBucket.Arn
+    Export:
+      Name: MLProjectBucketArn
